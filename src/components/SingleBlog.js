@@ -1,14 +1,20 @@
 
-import React from 'react';
+import React, {Component} from 'react';
 
-let SingleBlog = ({ userId, title, body }) => {
+class SingleBlog extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {id:props.id, title:props.title, body:props.body}
+    }
+    render() {
     return (
         <div>
-            <h1> {title} </h1>
-            <h3> user id: {userId} </h3>
-            <p> {body} </p>
+            <h1> {this.state.title} </h1>
+            <h3> id: {this.state.id} </h3>
+            <p> {this.state.body} </p>
         </div>
     )
+}
     
 }
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Greeting from './components/greeting.js'
-import SingleBlog from './components/SingleBlog.js'
+import Greeting from './components/greeting'
+import SingleBlog from './components/SingleBlog'
+import BlogList from './components/BlogList'
 
 class App extends Component {
   constructor(props) {
@@ -12,13 +13,11 @@ class App extends Component {
   }
 
   componentDidMount() { 
-
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(res => res.json())
       .then(blogs => {
         this.setState({blogs: blogs});
-        console.log(this.state.blogs)
-      
+        console.log(this.state.blogs)     
       })
   }
 
@@ -29,26 +28,16 @@ class App extends Component {
         <header className="App-header">
           <Greeting person="Jaehee"/>
         </header>
-
-      {this.state.blogs
-          ? (
-            <div className="container">
-            {this.state.blogs.map((blog) => {
-                return (
-                <div>
-                  <h3> {blog.title} </h3>
-                  <p> id: {blog.id} </p>
-                  <p> {blog.body} </p>
-                </div>
-              )}
-            )}
-        </div>) 
-        : null
-      }
-
-      <footer className="App-footer">
-        <p>Copyright 2018</p>
-      </footer>
+        {
+          this.state.blogs 
+          ? <BlogList 
+            blogData={this.state.blogs}
+            />
+          :null
+        }
+        <footer className="App-footer">
+          <p>Copyright 2018</p>
+        </footer>
 
       </div>
     );
